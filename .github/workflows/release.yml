@@ -9,6 +9,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+            persist-credentials: false
 
       - name: Release
         uses: huggingface/semver-release-action@latest
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
