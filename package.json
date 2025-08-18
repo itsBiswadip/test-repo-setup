@@ -1,0 +1,30 @@
+{
+  "name": "test-repo-setup",
+  "version": "1.0.0",
+  "description": "dev setup",
+  "homepage": "https://github.com/itsBiswadip/test-repo-setup#readme",
+  "bugs": {
+    "url": "https://github.com/itsBiswadip/test-repo-setup/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsBiswadip/test-repo-setup.git"
+  },
+  "license": "ISC",
+  "author": "Biswadip",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^9.1.7"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
