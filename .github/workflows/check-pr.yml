@@ -8,8 +8,7 @@ on:
       - reopened
 
 jobs:
-  main:
-    name: Validate PR title
+  pr-title:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: read
