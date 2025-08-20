@@ -5,6 +5,12 @@ on:
     branches:
       - main
       - master
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+  workflow_dispatch:
 
 jobs:
   allow-branch-merge:
