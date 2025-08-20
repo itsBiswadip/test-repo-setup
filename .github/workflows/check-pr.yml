@@ -6,7 +6,6 @@ on:
       - opened
       - edited
       - reopened
-  workflow_dispatch:
 
 jobs:
   pr-title:
