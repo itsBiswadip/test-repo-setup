@@ -1,0 +1,40 @@
+name: Validate Branch Merge
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  allow-branch-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate source branch for PRs to main or master
+        run: |
+          TARGET_BRANCH="${{ github.event.pull_request.base.ref }}"
+          SOURCE_BRANCH="${{ github.event.pull_request.head.ref }}"
+          
+          echo "PR target branch: $TARGET_BRANCH"
+          echo "PR source branch: $SOURCE_BRANCH"
+          
+          if [[ "$TARGET_BRANCH" == "main" ]]; then
+            if [[ "$SOURCE_BRANCH" == "master" ]] || [[ "$SOURCE_BRANCH" == hotfix/* ]]; then
+              echo "Merge into main is allowed from $SOURCE_BRANCH"
+              exit 0
+            else
+              echo "Merges into 'main' are only allowed from 'master' or 'hotfix/*' branches."
+              exit 1
+            fi
+          elif [[ "$TARGET_BRANCH" == "master" ]]; then
+            if [[ "$SOURCE_BRANCH" == feature/* ]] || [[ "$SOURCE_BRANCH" == bugfix/* ]] || [[ "$SOURCE_BRANCH" == "main" ]]; then
+              echo "Merge into master is allowed from $SOURCE_BRANCH"
+              exit 0
+            else
+              echo "Merges into 'master' are only allowed from 'feature/*', 'bugfix/*', or 'main' branches."
+              exit 1
+            fi
+          else
+            echo "Merging of branch is allowed. This workflow only applies to merges to main or master branches."
+            exit 0
+          fi
