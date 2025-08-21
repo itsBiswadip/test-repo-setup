@@ -1,0 +1,20 @@
+{
+    "name": "Restrict Branch Creation from master",
+    "enforcement": "active",
+    "target": {
+      "repositories": ["*"],
+      "branches": ["master"]
+    },
+    "rules": [
+      {
+        "type": "metadata",
+        "parameters": {
+          "branch_name": {
+            "requirement": "must_match",
+            "pattern": "^(feature\\/.*|bugfix\\/.*|revert-.*)$",
+            "message": "Only feature/*, bugfix/*, and revert-* branches can be created from master."
+          }
+        }
+      }
+    ]
+  }
