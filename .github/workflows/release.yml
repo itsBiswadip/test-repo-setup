@@ -7,6 +7,7 @@ on:
 
 permissions:  
   contents: write
+  pull-requests: write
 
 jobs:
   release:
@@ -16,7 +17,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          # Keep credentials so downstream steps can push tags
+          persist-credentials: true
+          # Fetch full history and tags so semver can calculate correctly
+          fetch-depth: 0
+
+      - name: Configure Git for tagging
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Semver Release
         uses: huggingface/semver-release-action@latest
