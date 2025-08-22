@@ -1,0 +1,30 @@
+{
+  "name": "Branch Creation Ruleset",
+  "target": "branch",
+  "source_type": "Organization",
+  "source": "your-org-name",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "include": [
+        "refs/heads/feature/*",
+        "refs/heads/bugfix/*",
+        "refs/heads/revert-*",
+        "refs/heads/hotfix/*"
+      ]
+    }
+  },
+  "rules": [
+    {
+      "type": "branch_creation_restrictions",
+      "parameters": {
+        "allowed_source_branches": {
+          "refs/heads/feature/*": ["refs/heads/master"],
+          "refs/heads/bugfix/*": ["refs/heads/master"],
+          "refs/heads/revert-*": ["refs/heads/master"],
+          "refs/heads/hotfix/*": ["refs/heads/main"]
+        }
+      }
+    }
+  ]
+}

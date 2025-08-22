@@ -1,6 +1,12 @@
 name: Prod Release
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
+
+permissions:  
+  contents: write
 
 jobs:
   release:
@@ -8,11 +14,11 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-            persist-credentials: false
+          persist-credentials: false
 
       - name: Semver Release
         uses: huggingface/semver-release-action@latest
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
