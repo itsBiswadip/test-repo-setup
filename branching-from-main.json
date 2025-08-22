@@ -1,0 +1,20 @@
+{
+    "name": "Restrict Branch Creation from main",
+    "enforcement": "active",
+    "target": {
+      "repositories": ["*"],
+      "branches": ["main"]
+    },
+    "rules": [
+      {
+        "type": "metadata",
+        "parameters": {
+          "branch_name": {
+            "requirement": "must_match",
+            "pattern": "^(hotfix\\/.*|revert-.*)$",
+            "message": "Only hotfix/* and revert-* branches can be created from main."
+          }
+        }
+      }
+    ]
+  }
